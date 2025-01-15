@@ -20,14 +20,12 @@ export class InputDialog
   constructor() {
     super(`<section class="dialog">
       <div class="dialog__container">
-  <button class="dialog__close">$times;</button>
+  <button class="close">&times;</button>
   <div id="dialog__body"></div>
   <button class="dialog__submit">ADD</button>
   </div>
 </section>`);
-    const closeBtn = this.element.querySelector(
-      '.dialog__close'
-    )! as HTMLButtonElement;
+    const closeBtn = this.element.querySelector('.close')! as HTMLButtonElement;
     closeBtn.addEventListener('click', () => {
       this.closeListener && this.closeListener();
     });
