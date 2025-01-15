@@ -38,21 +38,12 @@ export class PageItemComponent
     super(`<li class="page-item" draggable="true">
   <section class="page-item__body"></section>
   <div class="page-item__controls">
-    <button class="close">&times;</button>
+    <button class="close"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg></button>
   </div>
 </li>`);
-    this.element.addEventListener('dragstart', (event: DragEvent) => {
-      this.onDragStart(event);
-    });
-    this.element.addEventListener('dragend', (event: DragEvent) => {
-      this.onDragEnd(event);
-    });
-    this.element.addEventListener('dragenter', (event: DragEvent) => {
-      this.onDragEnter(event);
-    });
-    this.element.addEventListener('dragleave', (event: DragEvent) => {
-      this.onDragLeave(event);
-    });
+
     const closeBtn = this.element.querySelector('.close')! as HTMLButtonElement;
     closeBtn.onclick = () => {
       this.closeListener && this.closeListener();
@@ -116,12 +107,6 @@ export class PageComponent
   private dropTarget?: SectionContainer;
   constructor(private pageItemConstructor: SectionContainerConstructor) {
     super('<ul class="page"></ul>');
-    this.element.addEventListener('dragover', (event: DragEvent) => {
-      this.onDragOver(event);
-    });
-    this.element.addEventListener('drop', (event: DragEvent) => {
-      this.onDrop(event);
-    });
   }
   onDragOver(_: DragEvent) {}
   onDrop(event: DragEvent) {
@@ -132,6 +117,7 @@ export class PageComponent
       const dropY = event.clientY;
       const srcElement = this.dragTarget.getBoundingRect();
       this.dragTarget?.removeFrom(this.element);
+
       this.dropTarget.attach(
         this.dragTarget,
         dropY < srcElement.y ? 'beforebegin' : 'afterend'

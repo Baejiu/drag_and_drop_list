@@ -3,24 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Motion</title>
+    <title>Drag & Drop List</title>
     <link rel="stylesheet" href="./style/style.css" />
     <script type="module" src="./dist/app.js" defer></script>
   </head>
   <body>
     <div class="app">
       <header class="banner">
-        <h1 class="banner__title">Motion</h1>
-        <ul class="control-panel">
-          <li><button id="new-image" class="create-button">Image</button></li>
-          <li><button id="new-video" class="create-button">Video</button></li>
-          <li><button id="new-note" class="create-button">Note</button></li>
-          <li><button id="new-todo" class="create-button">Todo</button></li>
-        </ul>
+        <h1 class="banner__title">Drag & Drop List</h1>
+        <div class="control">
+          <button id="panel-button" class="panel-button">ADD</button>
+          <ul class="control-panel">
+            <li><button id="new-image" class="create-button">Image</button></li>
+            <li><button id="new-video" class="create-button">Video</button></li>
+            <li><button id="new-note" class="create-button">Note</button></li>
+            <li><button id="new-todo" class="create-button">Todo</button></li>
+          </ul>
+        </div>
       </header>
       <main class="document"></main>
       <footer class="footer">
-        <p>Copyright by Dream Coding Academy. All right reserved.</p>
+        <p>&copy; Copyright by jiu bae. All right reserved.</p>
       </footer>
     </div>
   </body>

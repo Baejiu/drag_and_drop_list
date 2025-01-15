@@ -1,4 +1,5 @@
 import { Component } from './components/component.js';
+import { ControlPanal } from './components/control.js';
 import {
   InputDialog,
   MediaData,
@@ -25,6 +26,8 @@ class App {
   constructor(appRoot: HTMLElement, private dialogRoot: HTMLElement) {
     this.page = new PageComponent(PageItemComponent);
     this.page.attachTo(appRoot);
+
+    // For demo
     this.bindElementToDialog<MediaSectionInput>(
       '#new-image',
       MediaSectionInput,
@@ -48,30 +51,35 @@ class App {
     );
 
     this.page.addChild(
-      new ImageComponent('Image Title', 'https://picsum.photos/600/300')
+      new ImageComponent('Randim Image', 'https://picsum.photos/600/300')
     );
     this.page.addChild(
       new VideoComponent(
-        'Video Title',
+        'PlayList video',
         'https://www.youtube.com/watch?v=RRjy2B-bDs0'
       )
     );
-    this.page.addChild(new NoteComponent('Note Title', 'Note contents !'));
-    this.page.addChild(new TodoComponent('Todo Title', 'motion!!'));
+    this.page.addChild(new NoteComponent('Drag and Drop!', 'Note contents.'));
+    this.page.addChild(new TodoComponent('read a Book', 'Clean Architecture'));
     this.page.addChild(
-      new ImageComponent('Image Title', 'https://picsum.photos/600/300')
+      new ImageComponent('Randim Photo', 'https://picsum.photos/600/300')
     );
     this.page.addChild(
       new VideoComponent(
-        'Video Title',
-        'https://www.youtube.com/watch?v=RRjy2B-bDs0'
+        'Wallace & Gromit',
+        'https://www.youtube.com/watch?v=4iRLGKOPqXc'
       )
     );
-    this.page.addChild(new NoteComponent('Note Title', 'Note contents !'));
-    this.page.addChild(new TodoComponent('Todo Title', 'motion!!'));
+    this.page.addChild(
+      new NoteComponent(
+        'Good sentence',
+        'Better late than never! 늦더라도 안 하는 것보다 낫다.'
+      )
+    );
+    this.page.addChild(
+      new TodoComponent('little happiness', 'deciding on dinner menu. 🍽️')
+    );
   }
-
-  // For demo
 
   private bindElementToDialog<T extends (MediaData | TextData) & Component>(
     selector: string,
@@ -96,3 +104,4 @@ class App {
 }
 
 new App(document.querySelector('.document')! as HTMLElement, document.body);
+new ControlPanal(document.querySelector('.control')! as HTMLElement);
