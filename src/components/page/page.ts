@@ -1,3 +1,9 @@
+import {
+  EnableDragging,
+  EnableDrop,
+  EnableHover,
+} from '../../decorators/draggable.js';
+import { Draggable, Droppable, Hoverable } from '../common/type.js';
 import { BaseComponent, Component } from '../component.js';
 
 export interface Composable {
@@ -9,7 +15,7 @@ type OnDragStateListener<T extends Component> = (
   target: T,
   state: DragState
 ) => void;
-interface SectionContainer extends Component, Composable {
+interface SectionContainer extends Component, Composable, Draggable, Hoverable {
   setOnCloseListener(listener: OnCloseListener): void;
   setOnDragStateListener(listener: OnDragStateListener<SectionContainer>): void;
   muteChildren(state: 'mute' | 'unmute'): void;
@@ -20,6 +26,8 @@ type SectionContainerConstructor = {
   new (): SectionContainer;
 };
 
+@EnableDragging
+@EnableHover
 export class PageItemComponent
   extends BaseComponent<HTMLElement>
   implements SectionContainer
@@ -97,9 +105,11 @@ export class PageItemComponent
     this.element.classList.remove('drop-area');
   }
 }
+
+@EnableDrop
 export class PageComponent
   extends BaseComponent<HTMLUListElement>
-  implements Composable
+  implements Composable, Droppable
 {
   private children = new Set<SectionContainer>();
   private dragTarget?: SectionContainer;
@@ -113,11 +123,8 @@ export class PageComponent
       this.onDrop(event);
     });
   }
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-  }
+  onDragOver(_: DragEvent) {}
   onDrop(event: DragEvent) {
-    event.preventDefault();
     if (!this.dropTarget) {
       return;
     }
